@@ -8,7 +8,7 @@ spring:
     druid:
       initial-size: 5
       min-idle: 10
-      max-active: 20
+      max-active: 30
       stat-view-servlet:
         login-username: druid
         login-password: druid
@@ -20,4 +20,4 @@ spring:
 
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #ø™∆Ùsql»’÷æ
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
