@@ -6,13 +6,13 @@ import org.slf4j.LoggerFactory;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import static java.util.concurrent.Executors.newScheduledThreadPool;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 public class CompletableFutureCollector {
@@ -22,7 +22,7 @@ public class CompletableFutureCollector {
      */
     private static Logger LOGGER = LoggerFactory.getLogger(CompletableFutureCollector.class);
 
-    private CompletableFutureCollector(){
+    private CompletableFutureCollector() {
     }
 
     /**
@@ -32,7 +32,7 @@ public class CompletableFutureCollector {
      * @param <T> some CompletableFuture
      * @return a CompletableFuture of <pre>{@code CompletableFuture<List<T>>}</pre> that is complete when all collected CompletableFutures are complete.
      */
-    public static <X, T extends CompletableFuture<X>> Collector<T, ?, CompletableFuture<List<X>>> collectResult(){
+    public static <X, T extends CompletableFuture<X>> Collector<T, ?, CompletableFuture<List<X>>> collectResult() {
         return Collectors.collectingAndThen(Collectors.toList(), joinResult());
     }
 
@@ -44,16 +44,16 @@ public class CompletableFutureCollector {
      * @param <T> some CompletableFuture
      * @return a <pre>{@code CompletableFuture<Void>}</pre> that is complete when all collected CompletableFutures are complete.
      */
-    public static <T extends CompletableFuture<?>> Collector<T, ?, CompletableFuture<Void>> allComplete(){
+    public static <T extends CompletableFuture<?>> Collector<T, ?, CompletableFuture<Void>> allComplete() {
         return Collectors.collectingAndThen(Collectors.toList(), CompletableFutureCollector::allOf);
     }
 
     private static <X, T extends CompletableFuture<X>> Function<List<T>, CompletableFuture<List<X>>> joinResult() {
-        return ls-> allOf(ls)
-            .thenApply(v -> ls
-                .stream()
-                .map(CompletableFuture::join)
-                .collect(Collectors.toList()));
+        return ls -> allOf(ls)
+                .thenApply(v -> ls
+                        .stream()
+                        .map(CompletableFuture::join)
+                        .collect(Collectors.toList()));
     }
 
     private static <T extends CompletableFuture<?>> CompletableFuture<Void> allOf(List<T> ls) {
@@ -73,7 +73,8 @@ public class CompletableFutureCollector {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(ms);
-            } catch (InterruptedException e) { }
+            } catch (InterruptedException e) {
+            }
             return t;
         });
     }
@@ -95,7 +96,7 @@ public class CompletableFutureCollector {
         return promise;
     }
 
-    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(
+    private static final ScheduledExecutorService scheduler = newScheduledThreadPool(
             50);
 
     /**
