@@ -2,7 +2,6 @@ package com.site.api.web.rest.ctrip;
 
 import com.baomidou.mybatisplus.core.toolkit.SystemClock;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.site.api.util.constants.SibeConstants;
 import comm.ota.ctrip.model.CtripSearchRequest;
