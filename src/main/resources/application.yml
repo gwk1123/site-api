@@ -18,6 +18,16 @@ spring:
     host: 8.129.213.16
     port: 6379
 
+    pool:
+      # 最大可用连接数（默认为8，负数表示无限）
+      max-active: 1000
+      # 最大空闲连接数（默认为8，负数表示无限）
+      max-idle: 300
+      # 最小空闲连接数（默认为0，该值只有为正数才有作用）
+      min-idle: 100
+      # 从连接池中获取连接最大等待时间（默认为-1，单位为毫秒，负数表示无限）
+      max-wait: 3000
+
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -57,12 +67,12 @@ sxysibe:
     #站点
     #        ota: MAFENGWO
     #        site: MFW001
-    ota: OWT
-    site: OWT001
+#    ota: OWT
+#    site: OWT001
     #        ota: LY
     #        site: LY001
-    #        ota: CTRIP
-    #        site: CT001
+    ota: CTRIP
+    site: CT001
     #        ota: FLIGGY
     #        site: TBSXYPT
     #cid 可以理解为：app key 身份识别
