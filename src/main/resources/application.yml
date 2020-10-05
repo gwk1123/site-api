@@ -35,7 +35,7 @@ mybatis-plus:
 
 sxysibe:
   compass:
-    switchgds: true
+    switchgds: false
     compresstype: GZIP
     #  switchgds所有站点统一 开启或关闭 ,切换gds开关是必须情况原来的redis
     #  switchsite  注意B2C 统一站点和OTA 统一站点一致
@@ -165,5 +165,14 @@ sxysibe:
         mobile: 852-31055092
         ctct: 8618948735931
         email: MT.sxycsh@cywz.cn
-
+    nh:
+      app-key: test
+      search-url: http://127.0.0.1:8086
+      other-url: http://192.168.3.221:19091
+      contact:
+        name: HONG KONG NG CHOW INTERNATIONAL TRAVEL LTD - WEBSVC
+        address: FLAT G, 15/F, KINGLAND APARTMENTS, 739 NATHAN ROAD MONGKOK, KOWLOON, HK
+        mobile: 852-31055092
+        ctct: 8618948735931
+        email: MT.sxycsh@cywz.cn
 
